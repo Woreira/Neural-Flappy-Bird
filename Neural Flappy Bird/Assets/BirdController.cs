@@ -38,7 +38,6 @@ public class BirdController : MonoBehaviour{
 
     void OnTriggerEnter2D(Collider2D c){
         if(c.gameObject.tag == "Obstacle"){
-            print("DEAD");
             isAlive = false;
         }
     }

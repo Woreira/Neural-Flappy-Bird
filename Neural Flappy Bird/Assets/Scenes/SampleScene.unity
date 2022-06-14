@@ -185,9 +185,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d58e1349567822478c1d09cd99c7119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topology: 04000000040000000400000002000000
+  topology: 04000000050000000500000002000000
   population: 100
-  mutationRate: 0.2
+  mutationRate: 0.05
   generation: 0
   spawnPos: {x: -5, y: 3, z: 0}
   timer: 0

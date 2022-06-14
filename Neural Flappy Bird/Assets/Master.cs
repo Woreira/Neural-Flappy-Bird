@@ -46,11 +46,15 @@ public class Master : MonoBehaviour{
 
     void CullAndBreed(){
         generation++;
-        puppets.OrderBy(x => x.fitness);
+        puppets = puppets.OrderByDescending(x => x.fitness).ToList();
+        //print the mean fitness of all the population
+        print("Generation: " + generation + " Mean Fitness: " + puppets.Average(x => x.fitness));
+        
         List<Puppet> newPuppets = new List<Puppet>();
-        for(int i = 0; i < population / 2; i++){
+       
+        for(int i = 0; i < 3*population/4; i++){
             var parentA = puppets[i];
-            var parentB = puppets[i + 1];
+            var parentB = puppets[i+1];
             var childA = Instantiate(birdPrefab, spawnPos, Quaternion.identity);
             var childB = Instantiate(birdPrefab, spawnPos, Quaternion.identity);
             var childAPuppet = childA.GetComponent<Puppet>();

@@ -19,6 +19,11 @@ public class LevelManager : MonoBehaviour{
         inst = this;
     }
 
+    void OnDrawGizmos(){
+        Gizmos.color = Color.red;
+        if(nextObstacle != null) Gizmos.DrawWireSphere(nextObstacle.transform.position, 0.5f);
+    }
+
     void Start(){
         SpawnObstacle();
     }

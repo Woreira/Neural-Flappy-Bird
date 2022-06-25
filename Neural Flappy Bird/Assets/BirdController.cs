@@ -22,7 +22,6 @@ public class BirdController : MonoBehaviour{
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
-    //rotate based on the vertical speed
     void Rotate(){
         float angle = Mathf.Lerp(0, 70, rb.velocity.y / 5);
         transform.rotation = Quaternion.Euler(0, 0, angle);
@@ -30,15 +29,18 @@ public class BirdController : MonoBehaviour{
 
     void CheckDeathScreen(){
         if(transform.position.y < -4f || transform.position.y > 6f){
-            isAlive = false;
+            Die();
         }
     }
 
-    
-
     void OnTriggerEnter2D(Collider2D c){
         if(c.gameObject.tag == "Obstacle"){
-            isAlive = false;
+            Die();
         }
+    }
+
+    void Die(){
+        isAlive = false;
+        GetComponent<Renderer>().material.color = Color.red;
     }
 }

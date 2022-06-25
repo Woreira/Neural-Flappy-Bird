@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-//run for a max of a 100s or until every bird dies. Pick the first 20 of 100 to be the parents.
 public class Master : MonoBehaviour{
     
     public static Master inst;
@@ -47,13 +46,14 @@ public class Master : MonoBehaviour{
     void CullAndBreed(){
         generation++;
         puppets = puppets.OrderByDescending(x => x.fitness).ToList();
+        
         //print the mean fitness of all the population
         print("Generation: " + generation + " Mean Fitness: " + puppets.Average(x => x.fitness));
         
         List<Puppet> newPuppets = new List<Puppet>();
-       
+        var parentA = puppets[0];
+        newPuppets.Add(parentA);
         for(int i = 0; i < 3*population/4; i++){
-            var parentA = puppets[i];
             var parentB = puppets[i+1];
             var childA = Instantiate(birdPrefab, spawnPos, Quaternion.identity);
             var childB = Instantiate(birdPrefab, spawnPos, Quaternion.identity);
@@ -67,8 +67,10 @@ public class Master : MonoBehaviour{
             newPuppets.Add(childBPuppet);
         }
 
+        puppets.RemoveAt(0);
         puppets.ForEach(x => Destroy(x.gameObject));
         puppets = newPuppets;
+        puppets.ForEach(x => x.fitness = 0f);
         LevelManager.inst.ClearObstacles();
     }
 

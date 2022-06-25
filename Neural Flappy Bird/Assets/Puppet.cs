@@ -26,6 +26,7 @@ public class Puppet : MonoBehaviour{
         }
 
         fitness += Time.deltaTime;
+        fitness -= Vector3.Distance(bird.transform.position, LevelManager.nextObstacle.transform.position);
     }
 
 }
